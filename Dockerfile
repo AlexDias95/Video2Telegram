@@ -5,8 +5,8 @@ RUN apt-get -y update && \
     apt-get install -y python build-essential \
     libssl-dev \
     libffi-dev \
-    python-dev \
-    python-pip \
+    python3-dev \
+    python3-pip \
     ffmpeg && \
     rm -rf /var/lib/apt/lists/* && \
     rm -f /tmp/*
