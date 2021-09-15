@@ -6,6 +6,7 @@ import ffmpy
 TOKEN = os.getenv('BOT_TOKEN')
 FOLDER = os.getenv('FOLDER', '/tmp/')
 EXTENSION = os.getenv('EXTENSION', 'mp4')
+EXTENSION2 = os.getenv('EXTENSION2', 'avi')
 DESTINATION = os.getenv('DESTINATION')
 
 bot = telegram.Bot(TOKEN)
@@ -13,13 +14,13 @@ notifier = inotify.adapters.InotifyTree(FOLDER)
 
 for event in notifier.event_gen():
     if event is not None:
-        if 'IN_CLOSE_WRITE' in event[1] and EXTENSION in event[3]:
+        if 'IN_CLOSE_WRITE' in event[1] and (EXTENSION in event[3] or EXTENSION2 in event[3]):
             file_path = event[2] + '/' + event[3]
             try:
                 gif_path = '/tmp/file2gif.gif'
                 ff = ffmpy.FFmpeg(
                     inputs={file_path: None},
-                    outputs={gif_path: None}
+                    outputs={gif_path: '-ss 00:02:00.0 -to 00:00:30.0'}
                 )
                 ff.run()
                 file_open = open(gif_path, 'rb')
