@@ -10,7 +10,7 @@ RUN apt-get -y update && \
     ffmpeg && \
     rm -rf /var/lib/apt/lists/* && \
     rm -f /tmp/*
-RUN pip install --upgrade setuptools \
+RUN pip3 install --upgrade setuptools \
     python-telegram-bot \
     inotify \
     requests \
