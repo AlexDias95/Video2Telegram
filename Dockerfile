@@ -1,21 +1,21 @@
-FROM ubuntu:bionic
+FROM python:3
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    apt-get install -y python build-essential \
+    apt-get install -y build-essential \
+    curl \
     libssl-dev \
     libffi-dev \
-    python3-dev \
-    python3-pip \
     ffmpeg && \
     rm -rf /var/lib/apt/lists/* && \
     rm -f /tmp/*
-RUN pip3 install --upgrade setuptools \
+RUN pip install --upgrade setuptools \
     python-telegram-bot \
-    inotify \
     requests \
+    inotify \
+    nose \
     ffmpy
 
 ADD file2gif.py /
 
-CMD [ "python", "./file2gif.py" ]
+CMD [ "python", "/file2gif.py" ]
