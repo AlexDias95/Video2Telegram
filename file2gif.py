@@ -38,3 +38,4 @@ for event in notifier.event_gen():
                 bot.send_chat_action(DESTINATION, 'upload_document')
                 bot.send_document(DESTINATION, file_open, timeout=600)
             os.remove(gif_path)
+            os.remove(file_send_path)
